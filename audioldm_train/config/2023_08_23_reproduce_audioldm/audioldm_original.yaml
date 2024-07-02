@@ -4,7 +4,7 @@ project: "audioldm"
 precision: "high"
 
 variables:
-  sampling_rate: &sampling_rate 16000 
+  sampling_rate: &sampling_rate 44100 
   mel_bins: &mel_bins 64
   latent_embed_dim: &latent_embed_dim 8
   latent_t_size: &latent_t_size 256 # TODO might need to change
@@ -22,8 +22,8 @@ data:
   dataloader_add_ons: [] 
 
 step:
-  validation_every_n_epochs: 5
-  save_checkpoint_every_n_steps: 5000
+  validation_every_n_epochs: 10000
+  save_checkpoint_every_n_steps: 10000
   # limit_val_batches: 2
   max_steps: 800000
   save_top_k: 1
@@ -136,7 +136,7 @@ model:
         target: audioldm_train.conditional_models.CLAPAudioEmbeddingClassifierFreev2
         params:
           pretrained_path: data/checkpoints/clap_htsat_tiny.pt
-          sampling_rate: 16000
+          sampling_rate: 44100
           embed_mode: text # or text
           amodel: HTSAT-tiny
 
